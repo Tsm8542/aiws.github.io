@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input</title>
+</head>
+<script>
+    var model;
+    var predResult = document.getElementById("result");
+    async function initialize() {
+        model = await tf.loadLayersModel('https://teachablemachine.withgoogle.com/models/5ABLKLj6h/model.json');
+    }
+    async function predict() {
+    // action for the submit button
+    let image = document.getElementById("img")  
+    let tensorImg =   tf.browser.fromPixels(image).resizeNearestNeighbor([150, 150]).toFloat().expandDims();
+    prediction = await model.predict(tensorImg).data();
+    if (prediction[0] === 0) {
+        predResult.innerHTML = "I think it's a cat";
+    } else if (prediction[0] === 1) {
+        predResult.innerHTML = "I think it's a dog";
+    } else {
+        predResult.innerHTML = "This is Something else";
+    }
+    }
+    initialize();
+</script>
+<body>
+    Rear Camera
+    <input type="file" accept="image/*" capture="environment">
+    Front Camera
+    <input type="file" accept="image/*" capture="user">
+    <img src="./images/courage.jpg">
+</body>
+</html>
