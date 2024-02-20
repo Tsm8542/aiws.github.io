@@ -104,7 +104,7 @@ let video;
 let label = "waiting...";
 // The classifier
 let classifier;
-let modelURL = 'https://teachablemachine.withgoogle.com/models/5ABLKLj6h/';
+let modelURL = 'https://teachablemachine.withgoogle.com/models/8jI_NYJHL/';
 let options = {
   video:{
     facingMode:{exact:"environment"}
@@ -118,7 +118,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(640, 520);
+  createCanvas(320, 240);
   // Create the video
   video = createCapture(options);
   video.hide();
